@@ -7,7 +7,10 @@ export const Navbar = () => {
         <h1 className="text-3xl font-bold primary-color ml-4">M.Z</h1>
         <ul className="hidden md:flex">
             <li className="p-5">
-                <Link href="#about">About</Link>{" "}
+                <Link href="/">Home</Link>{" "}
+            </li>
+            <li className="p-5">
+                <Link href="/about">About</Link>{" "}
             </li>
             <li className="p-5">
                 <Link href="#work">Work</Link>{" "}
