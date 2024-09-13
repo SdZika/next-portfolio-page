@@ -1,9 +1,10 @@
 import Image from "next/image";
 import { TextAnimation } from "./components/TextAnimation";
+import { Skills } from "./components/Skills";
 
 export default function Home() {
   return (
-    
+  <> 
     <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-[1200px] md:h-[100vh] py-12 mx-auto bg-black">
       <div className="col-span-1 my-auto mx-auto w-[300px] h-auto lg:w-[400px]">
           <Image src="/images/portfolio.png" alt="hero" width={350} height={350} />
@@ -20,8 +21,8 @@ export default function Home() {
         </p>
         <div className="my-8">
           <a
-            //href="cv.pdf"
-            //download="cv.pdf"
+            href="cv.pdf"
+            download="cv.pdf"
             className="px-6 py-3 w-full rounded-xl mr-4 bg-gradient-to-br from-orange-400 to-pink-500 text-white"
             target="_blank"
             rel="noopener noreferrer"
@@ -37,6 +38,7 @@ export default function Home() {
         </div>
       </div>
     </div>
-      
+    <Skills />
+    </> 
   );
 }
