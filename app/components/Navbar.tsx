@@ -16,10 +16,10 @@ export const Navbar = () => {
                 <Link href="/work">Work</Link>{" "}
             </li>
             <li className="p-5">
-                <Link href="#blog">Blog</Link>
+                <Link href="/blog">Blog</Link>
             </li>
             <li className="p-5">
-                <Link href="#contact">Contact</Link>{" "}
+                <Link href="/contact">Contact</Link>{" "}
             </li>
         </ul>
     </nav>
