@@ -13,7 +13,7 @@ interface ModalProps {
   export const Modal: FC<ModalProps> = ({ skill, closeModal }) => {
     
     return (
-      <div className="z-50 fixed inset-0 bg-black flex justify-center items-center w-[400px]">
+      <div className="bg-black flex justify-center items-center w-[400px]">
         <div 
             className="mt-10 flex flex-col gap-5  bg-[#161616] p-6 rounded-xl shadow-md max-w-md sm:max-w-lg lg:max-w-xl max-h-[80vh] overflow-y-auto transform transition-transform duration-300 hover:scale-105"
         >

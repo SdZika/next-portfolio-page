@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { client } from "@/sanity/client";
-import { defineQuery } from "next-sanity";
+import { defineQuery, PortableText } from "next-sanity";
 import { notFound } from "next/navigation";
 
 const EVENT_QUERY = defineQuery(`*[_type == "post" && slug.current == $slug][0]{
@@ -27,13 +27,14 @@ const EVENT_QUERY = defineQuery(`*[_type == "post" && slug.current == $slug][0]{
         } = blog; 
   
     return (
-      <main className="container mx-auto grid gap-12 p-12">
+      <main className="max-w-[800px] mx-auto py-12 px-6">
         <div className="mb-4">
-          <Link href="/" className="text-white">← Back to events</Link>
+          <Link href="/blog" className="text-white hover:underline">← Back to events</Link>
         </div>
            
-          {name ? <h1 className="text-white">{name}</h1> : null}
-          {publishedAt ? <p className="text-white">{publishedAt}</p> : null}
+          {name ? <h1 className="text-white text-4xl font-bold mb-4">{name}</h1> : null}
+          {publishedAt ? <p className="text-gray-400 mb-2">{publishedAt}</p> : null}
+          {body && body.length > 0 && (<div><PortableText value={body}/></div>)}
          
    
       </main>

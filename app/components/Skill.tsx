@@ -28,8 +28,8 @@ interface PropSkill {
           onMouseLeave={() => setActiveSkill(null)}
           className="flex flex-col items-center m-4 sm:my-0 w-[40px] md:w-[100px] transform transition-transform duration-300 hover:scale-105 cursor-pointer "
         >
-          <Image src={skill.image} alt={skill.name} className="z-0" />
-          <p className="mt-2 z-0">{skill.name}</p>
+          <Image src={skill.image} alt={skill.name} className={`${activeSkill?.id === skill.id ? "hidden" : ""}`} />
+          <p className={`mt-2 ${activeSkill?.id === skill.id ? "hidden" : ""}`}>{skill.name}</p>
           {activeSkill?.id === skill.id && (
             <Modal skill={skill} closeModal={() => setActiveSkill(null)} />
           )}
