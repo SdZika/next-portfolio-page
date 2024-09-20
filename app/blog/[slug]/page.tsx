@@ -3,13 +3,11 @@ import { client } from "@/sanity/client";
 import { defineQuery } from "next-sanity";
 import { notFound } from "next/navigation";
 
-const EVENT_QUERY = defineQuery(`*[_type == "post" &&
-    slug.current == $slug]{
-    _id,
-    name->,
+const EVENT_QUERY = defineQuery(`*[_type == "post" && slug.current == $slug][0]{
+    
+    name,
     publishedAt,
-    slug,
-    body->
+    body
   }`);
 
   export default async function EventPage({params,}: {params: { slug: string };}) {
@@ -24,7 +22,8 @@ const EVENT_QUERY = defineQuery(`*[_type == "post" &&
 
       const {
         name,
-       
+        publishedAt,
+        body
         } = blog; 
   
     return (
@@ -33,7 +32,8 @@ const EVENT_QUERY = defineQuery(`*[_type == "post" &&
           <Link href="/" className="text-white">← Back to events</Link>
         </div>
            
-          {name ? <p className="text-white">{name}</p> : null}  
+          {name ? <h1 className="text-white">{name}</h1> : null}
+          {publishedAt ? <p className="text-white">{publishedAt}</p> : null}
          
    
       </main>

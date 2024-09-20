@@ -5,12 +5,12 @@ import { client } from "@/sanity/client";
 
 
 
-const EVENTS_QUERY = defineQuery(`*[_type == "post" && defined(slug.current)] | order(publishedAt desc) {
+const EVENTS_QUERY = defineQuery(`*[_type == "post" && defined(slug.current)][0...12] | order(publishedAt desc) {
     _id,
     name,
     publishedAt,
     slug,
-    body
+    
   }`);
 
 export default async function IndexPage() {
