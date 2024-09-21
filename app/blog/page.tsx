@@ -21,7 +21,7 @@ export default async function IndexPage() {
     <main className="max-w-[1200px] mx-auto py-12">
 
        <div className="pb-8 mx-6">
-        <p className="text-4xl mb-3  pb-1 font-bold primary-color">Blog</p>
+        <p className="text-4xl mb-3 pb-1 font-bold primary-color">Blog</p>
         <p className="text-gray-400">Check out some of my recent blog</p>
       </div>
 
