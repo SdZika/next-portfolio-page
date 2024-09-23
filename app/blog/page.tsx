@@ -3,7 +3,7 @@ import { defineQuery } from "next-sanity";
 
 import { client } from "@/sanity/client";
 
-
+const options = { next: { revalidate: 60 } };
 
 const EVENTS_QUERY = defineQuery(`*[_type == "post" && defined(slug.current)][0...12] | order(publishedAt desc) {
     _id,
@@ -14,7 +14,7 @@ const EVENTS_QUERY = defineQuery(`*[_type == "post" && defined(slug.current)][0.
   }`);
 
 export default async function IndexPage() {
-  const blogs = await client.fetch(EVENTS_QUERY);
+  const blogs = await client.fetch(EVENTS_QUERY, options);
   console.log(blogs)
 
   return (
