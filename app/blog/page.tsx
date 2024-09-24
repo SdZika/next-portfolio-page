@@ -26,13 +26,14 @@ export default async function IndexPage() {
       </div>
 
       <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mx-6">
-        {blogs.map((blog) => (
+        {blogs.map((blog: {name: string, slug: {current: string}, publishedAt: string}) => (
           <li className="bg-[#161616] p-6 rounded-xl shadow-md transform transition-transform duration-300 hover:scale-105" key={blog._id}>
             <Link
               className="hover:underline"
               href={`/blog/${blog?.slug?.current}`}
             >
               <h2 className="text-2xl font-semibold primary-color">{blog?.name}</h2>
+              {console.log(`here is blog name ${blog.name}`)}
             </Link>
           </li>
         ))}
