@@ -60,7 +60,17 @@ const EVENT_QUERY = defineQuery(`*[_type == "post" && slug.current == $slug][0]{
             blockquote: ({ children }) => (
             <blockquote className="pl-4 border-l-4 border-gray-300 italic text-white">{children}</blockquote>
             ),
+            
           },
+          list: {
+            // Ex. 1: customizing common list types
+            bullet: ({children}) => <ul className="mt-xl text-white">{children}</ul>,
+            number: ({children}) => <ol className="mt-lg text-white">{children}</ol>,
+        
+            // Ex. 2: rendering custom lists
+            checkmarks: ({children}) => <ol className="m-auto text-lg text-white">{children}</ol>,
+          },
+
         };
 
           

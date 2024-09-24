@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import React from 'react'
+import { HamburgerMenu } from './HamburgerMenu'
 
 export const Navbar = () => {
   return (
@@ -22,6 +23,7 @@ export const Navbar = () => {
                 <Link href="/contact">Contact</Link>{" "}
             </li>
         </ul>
+        <HamburgerMenu />
     </nav>
     )
 }

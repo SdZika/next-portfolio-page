@@ -1,5 +1,3 @@
-"use client"
-
 import { skillList } from "./SkillsList";
 import { Skill } from "./Skill";
 
