@@ -1,7 +1,9 @@
 import Link from "next/link";
 import { defineQuery } from "next-sanity";
 
+
 import { client } from "@/sanity/client";
+
 
 const options = { next: { revalidate: 60 } };
 
