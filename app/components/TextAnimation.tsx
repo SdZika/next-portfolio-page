@@ -19,3 +19,5 @@ export const TextAnimation = () => {
   />
   )
 }
+
+// learn more about typeanimation

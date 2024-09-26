@@ -3,9 +3,10 @@ import { client } from "@/sanity/client";
 import { defineQuery } from "next-sanity";
 import { notFound } from "next/navigation";
 import {PortableText, PortableTextComponents} from '@portabletext/react'
+
 //import { urlFor } from "@/sanity/client";
 
-const options = { next: { revalidate: 60 } };
+
 
 const EVENT_QUERY = defineQuery(`*[_type == "post" && slug.current == $slug][0]{
     
@@ -17,7 +18,7 @@ const EVENT_QUERY = defineQuery(`*[_type == "post" && slug.current == $slug][0]{
   export default async function EventPage({params,}: {params: { slug: string };}) {
     
     
-    const blog = await client.fetch(EVENT_QUERY, params, options);
+    const blog = await client.fetch(EVENT_QUERY, params);
     console.log(blog)
 
     if (!blog) {
@@ -77,7 +78,7 @@ const EVENT_QUERY = defineQuery(`*[_type == "post" && slug.current == $slug][0]{
     return (
       <main className="max-w-[800px] mx-auto py-12 px-6">
         <div className="mb-4">
-          <Link href="/blog" className="text-gray-400 hover:underline">← Back to Blogs</Link>
+          <Link href="/blog" className="text-gray-400">← Back to Blogs</Link>
         </div>
            
           {name ? <h1 className="primary-color text-4xl font-bold mb-4">{name}</h1> : null}
