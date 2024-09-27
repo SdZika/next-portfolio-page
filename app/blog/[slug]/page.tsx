@@ -10,7 +10,7 @@ import {PortableText, PortableTextComponents} from '@portabletext/react'
 
 const EVENT_QUERY = defineQuery(`*[_type == "post" && slug.current == $slug][0]{
     
-    name,
+    title,
     publishedAt,
     body
   }`);
@@ -26,7 +26,7 @@ const EVENT_QUERY = defineQuery(`*[_type == "post" && slug.current == $slug][0]{
       }
 
       const {
-        name,
+        title,
         publishedAt,
         body
         } = blog; 
@@ -81,7 +81,7 @@ const EVENT_QUERY = defineQuery(`*[_type == "post" && slug.current == $slug][0]{
           <Link href="/blog" className="text-gray-400">← Back to Blogs</Link>
         </div>
            
-          {name ? <h1 className="primary-color text-4xl font-bold mb-4">{name}</h1> : null}
+          {title ? <h1 className="primary-color text-4xl font-bold mb-4">{title}</h1> : null}
           {publishedAt ? <p className="text-gray-400 mb-2">{publishedAt}</p> : null}
           {body && body.length > 0 && (<PortableText value={body} components={components }/>)}
          

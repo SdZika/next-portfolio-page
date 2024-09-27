@@ -1,6 +1,6 @@
 
 //import { defineQuery } from "next-sanity";
-import {POST_QUERY_JAVASCRIPT, POST_QUERY_REACT} from "../../sanity/lib/queries"
+import {POST_QUERY, POST_QUERY_JAVASCRIPT, POST_QUERY_REACT} from "../../sanity/lib/queries"
 
 import { client } from "@/sanity/client";
 import { Post } from "../components/Post";
@@ -8,15 +8,11 @@ import { Post } from "../components/Post";
 
 const options = { next: { revalidate: 60 } };
 
-// const EVENTS_QUERY = defineQuery(`*[_type == "post" && defined(slug.current)][0...12] | order(publishedAt desc) {
-//     _id,
-//     name,
-//     publishedAt,
-//     slug,
-//     postType
-//   }`);
+
 
 export default async function IndexPage() {
+
+  const blogsAll = await client.fetch(POST_QUERY, options);
   const blogsJavascript = await client.fetch(POST_QUERY_JAVASCRIPT, options);
   const blogsReact = await client.fetch(POST_QUERY_REACT, options);
 
@@ -30,7 +26,7 @@ export default async function IndexPage() {
       <h2 className="pb-8 mx-6 text-gray-400">Javascript</h2>
       <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mx-6">
         
-        {blogsJavascript.map((blog: {name: string, slug: {current: string}, publishedAt: string, postType: string, _id: string}) => (
+        {blogsJavascript.map((blog) => (
   
           <Post  key={blog._id} blog={blog} />
         ))}
@@ -38,7 +34,7 @@ export default async function IndexPage() {
       <h2 className="py-8 mx-6 text-gray-400">React</h2>
       <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mx-6">
       
-        {blogsReact.map((blog: {name: string, slug: {current: string}, publishedAt: string, postType: string, _id: string}) => (
+        {blogsReact.map((blog) => (
          
           <Post  key={blog._id} blog={blog} />
         ))}
