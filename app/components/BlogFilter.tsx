@@ -29,19 +29,19 @@ export function BlogFilter({ blogsAll, blogsJavascript, blogsReact }: BlogFilter
       
       <div className="flex space-x-4 my-6 mx-6">
         <button
-          className={`py-2 px-4 rounded ${selectedCategory === "all" ? " bg-gradient-to-br from-orange-400 to-pink-500 text-white" : "bg-gray-200"}`}
+          className={`py-2 px-4 rounded-xl ${selectedCategory === "all" ? " bg-gradient-to-br from-orange-400 to-pink-500 text-white" : "bg-gray-200"}`}
           onClick={() => setSelectedCategory("all")}
         >
           All
         </button>
         <button
-          className={`py-2 px-4 rounded ${selectedCategory === "javascript" ? " bg-gradient-to-br from-orange-400 to-pink-500 text-white" : "bg-gray-200"}`}
+          className={`py-2 px-4 rounded-xl ${selectedCategory === "javascript" ? " bg-gradient-to-br from-orange-400 to-pink-500 text-white" : "bg-gray-200"}`}
           onClick={() => setSelectedCategory("javascript")}
         >
           JavaScript
         </button>
         <button
-          className={`py-2 px-4 rounded ${selectedCategory === "react" ? " bg-gradient-to-br from-orange-400 to-pink-500 text-white" : "bg-gray-200"}`}
+          className={`py-2 px-4 rounded-xl ${selectedCategory === "react" ? " bg-gradient-to-br from-orange-400 to-pink-500 text-white" : "bg-gray-200"}`}
           onClick={() => setSelectedCategory("react")}
         >
           React
