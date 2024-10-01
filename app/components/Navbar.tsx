@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import React from 'react'
 import { HamburgerMenu } from './HamburgerMenu'
+import { logout } from '../logout/actions'
 
 export const Navbar = () => {
   return (
@@ -22,6 +23,16 @@ export const Navbar = () => {
             <li className="p-5">
                 <Link href="/contact">Contact</Link>{" "}
             </li>
+            <li className="p-5">
+                <Link href="/login">Login</Link>{" "}
+            </li>
+            <li className="p-5">
+                <form action={logout}>
+                    <button  type="submit" formAction={logout}>Logout</button>{" "}
+                </form>
+                
+            </li>
+
         </ul>
         <HamburgerMenu />
     </nav>
