@@ -1,15 +1,15 @@
 import Link from "next/link"
 
-interface Blog {
+interface BlogProps {
   title: string;
-  slug: {
+  slug?: {
     current: string;
   };
   // Add other blog properties as needed (e.g., content, author, date)
 }
 
 interface PostProps {
-  blog: Blog;
+  blog: BlogProps;
 }
 
 export const Post = ({blog}: PostProps) => {

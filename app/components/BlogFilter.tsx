@@ -8,7 +8,10 @@ import { Post } from "./Post";
 type Blog = {
   _id: string;
   title: string;
-  content: string;
+  publishedAt: string;
+  slug?: {
+    current: string;
+  };
   // Add other blog properties here (e.g., author, date, etc.)
 };
 
