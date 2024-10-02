@@ -1,10 +1,20 @@
 import Link from "next/link"
 
-export const Post = ({blog}: any) => {
+interface Blog {
+  title: string;
+  slug: {
+    current: string;
+  };
+  // Add other blog properties as needed (e.g., content, author, date)
+}
 
-  
+interface PostProps {
+  blog: Blog;
+}
 
-  return (
+export const Post = ({blog}: PostProps) => {
+
+    return (
         <li className="bg-[#161616] p-6 rounded-xl shadow-md transform transition-transform duration-300 hover:scale-105" >
             <Link
               className="hover:underline"

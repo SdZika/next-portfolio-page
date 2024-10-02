@@ -18,7 +18,7 @@ export const HamburgerMenu = () => {
   
     // Close the menu when Escape key is pressed
     useEffect(() => {
-        const handleKeyDown = (event) => {
+        const handleKeyDown = (event:  KeyboardEvent) => {
             if (event.key === "Escape") {
                 setNav(false);
             }

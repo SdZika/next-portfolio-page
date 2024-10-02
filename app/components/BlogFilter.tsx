@@ -3,10 +3,19 @@
 import { useState } from "react";
 import { Post } from "./Post";
 
+
+
+type Blog = {
+  _id: string;
+  title: string;
+  content: string;
+  // Add other blog properties here (e.g., author, date, etc.)
+};
+
 type BlogFilterProps = {
-  blogsAll: any[];
-  blogsJavascript: any[];
-  blogsReact: any[];
+  blogsAll: Blog[];
+  blogsJavascript: Blog[];
+  blogsReact: Blog[];
 };
 
 export function BlogFilter({ blogsAll, blogsJavascript, blogsReact }: BlogFilterProps) {
