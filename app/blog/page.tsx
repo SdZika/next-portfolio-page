@@ -1,20 +1,19 @@
 
-//import { defineQuery } from "next-sanity";
 import {Query, POST_QUERY} from "../../sanity/lib/queries"
 
 import { client } from "@/sanity/client";
 import {BlogFilter} from "../components/BlogFilter"
 
 
-const options = { next: { revalidate: 60 } };
+export const revalidate = 60; //need to resolve this, it was like option argumen in Query
 
 
 
 export default async function IndexPage() {
 
-  const blogsAll = await client.fetch(POST_QUERY, options);
-  const blogsJavascript = await client.fetch(Query("javascript"), options);
-  const blogsReact = await client.fetch(Query("react"), options);
+  const blogsAll = await client.fetch(POST_QUERY );
+  const blogsJavascript = await client.fetch(Query("javascript") );
+  const blogsReact = await client.fetch(Query("react") );
 
   console.log(Query("javascript"))
 
