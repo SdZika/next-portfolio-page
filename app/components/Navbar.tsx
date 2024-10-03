@@ -2,6 +2,7 @@ import Link from 'next/link'
 import React from 'react'
 import { HamburgerMenu } from './HamburgerMenu'
 import { logout } from '../logout/actions'
+import PrivatePage from '../private/page'
 
 export const Navbar = () => {
   return (
@@ -32,8 +33,9 @@ export const Navbar = () => {
                 </form>
                 
             </li>
-
+          
         </ul>
+        
         <HamburgerMenu />
     </nav>
     )
