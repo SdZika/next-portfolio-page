@@ -1,43 +1,45 @@
-"use client"
-import { FC } from "react";
+"use client";
+import { FC, useEffect } from "react";
+import ReactDOM from 'react-dom';
+
 
 interface ModalProps {
-    skill: {
-      name: string;
-      content: string;
-      link: string;
-    };
-    closeModal: () => void;
-  }
-  
-  export const Modal: FC<ModalProps> = ({ skill, closeModal }) => {
-    
-    return (
-      <div className="bg-black flex justify-center items-center w-[400px]">
-        <div 
-            className="mt-10 flex flex-col gap-5  bg-[#161616] p-6 rounded-xl shadow-md max-w-md sm:max-w-lg lg:max-w-xl max-h-[80vh] overflow-y-auto transform transition-transform duration-300 hover:scale-105"
-        >
-          <h2 className="text-2xl font-semibold text-primary-color mb-4">
-            {skill.name}
-          </h2>
-          <p className="text-gray-400 mb-4">
-            This is the modal content for {skill.content}
-          </p>
-          <a
-            href={skill.link}
-            target="_blank"
-            rel="noreferrer"
-            className="text-blue-500 underline"
-          >
-            Learn more about {skill.name}
-          </a>
+  children: React.ReactNode;
+  closeModal: () => void;
+  showModal: boolean;
+}
+
+export const Modal: FC<ModalProps> = ({ children, closeModal, showModal }) => {
+  useEffect(() => {
+    if (showModal) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+  }, [showModal]);
+
+  if (!showModal) return null;
+
+  return ReactDOM.createPortal(
+    <div
+      className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50"
+      onClick={closeModal} // Click outside to close modal
+    >
+      <div
+        className="relative bg-[#161616] p-6 rounded-xl shadow-md max-w-md sm:max-w-lg lg:max-w-xl max-h-[80vh] overflow-y-auto transform transition-transform duration-300 hover:scale-105"
+        onClick={(e) => e.stopPropagation()} // Prevent closing modal when clicking inside
+      >
+        
           <button
-            className="mt-2 px-4 py-2 bg-primary-color text-white rounded hover:bg-red-600"
+            className="absolute top-4 right-4 text-2xl text-gray-400"
             onClick={closeModal}
           >
-            Close
+            &times;
           </button>
-        </div>
+        
+        {children}
       </div>
-    );
-  };
+    </div>,
+    document.body
+  );
+};
