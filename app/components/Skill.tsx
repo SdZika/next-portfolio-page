@@ -32,7 +32,7 @@ export const Skill: FC<SkillProps> = ({ skill }) => {
 
       {/* Modal appears when hovering over skill */}
       <Modal showModal={showModal} closeModal={() => setShowModal(false)}>
-        <h2 className="text-2xl font-semibold text-primary-color mb-4">
+        <h2 className="text-2xl font-semibold text-gray-400 mb-4">
           {skill.name}
         </h2>
         <p className="text-gray-400 mb-4">{skill.content}</p>
