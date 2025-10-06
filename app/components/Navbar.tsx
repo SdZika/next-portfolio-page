@@ -1,17 +1,16 @@
 "use client"
 import Link from "next/link";
 import { HamburgerMenu } from "./HamburgerMenu";
-import { logout } from "../logout/actions";
 import { useAuth } from "../auth/AuthContext";
 
 
 export const Navbar = () => {
   
-  const { user, loading } = useAuth()
+  const { user, loading, logout } = useAuth()
 
   if (loading) return null
 
-  console.log("user email: ", user)
+  console.log("user email: ", user?.email)
 
   return (
     <nav className="border-b border-gray-600 bg-black text-gray-400 h-[100px] max-w-[1200px] mx-auto flex justify-between items-center">
@@ -39,11 +38,11 @@ export const Navbar = () => {
           </li>
         ) : (
           <li className="p-5">
-            <form action={logout}>
-              <button type="submit" className="hover:text-white">
+            
+              <button onClick={logout} type="submit" className="hover:text-white">
                 Logout
               </button>
-            </form>
+            
           </li>
         )}
       </ul>
