@@ -3,6 +3,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { createClient } from "@/supabase/client";
 import type { User } from "@supabase/supabase-js";
+import { useRouter } from "next/navigation";
 
 interface AuthContextType {
   user: User | null;
@@ -20,6 +21,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
   const supabase = createClient();
+  const router = useRouter();
 
   useEffect(() => {
     const getSession = async () => {
@@ -42,16 +44,19 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       if (event === "SIGNED_OUT") {
         setUser(null);
       }
+
+      router.refresh();
     });
 
     return () => subscription.unsubscribe();
-  }, [supabase]);
+  }, [supabase, router]);
 
 
   const logout = async () => {
     const { error } = await supabase.auth.signOut();
     if (error) console.error("Error logging out:", error);
     setUser(null);
+    router.refresh();
   };
 
   return (
