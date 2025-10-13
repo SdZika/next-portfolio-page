@@ -1,8 +1,15 @@
 import Image from "next/image";
 import { TextAnimation } from "./components/TextAnimation";
 import { Skills } from "./components/Skills";
+import { createClient } from "@/supabase/server";
 
-export default function Home() {
+export default async function Home() {
+
+  const suppabase = createClient()
+  
+  const {data: {user}} = await suppabase.auth.getUser()
+
+
   return (
   <> 
     <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-[1200px] md:h-[100vh] py-12 mx-auto bg-black">
@@ -19,10 +26,11 @@ export default function Home() {
           My name is Marko Zivkovic and I have 2+ years experience in web
           development.
         </p>
+        <p className="text-white">{user?.email}</p>
         <div className="my-8">
           <a
-            href="cv.pdf"
-            download="cv.pdf"
+            href="cv-4-25.pdf"
+            download="cv-4-25.pdf"
             className="px-6 py-3 w-full rounded-xl mr-4 bg-gradient-to-br from-orange-400 to-pink-500 text-white"
             target="_blank"
             rel="noopener noreferrer"
