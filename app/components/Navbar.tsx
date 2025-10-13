@@ -2,15 +2,21 @@
 import Link from "next/link";
 import { HamburgerMenu } from "./HamburgerMenu";
 import { useAuth } from "../auth/AuthContext";
+import { useRouter } from "next/navigation";
 
 
 export const Navbar = () => {
   
   const { user, loading, logout } = useAuth()
+  const router = useRouter();
+
 
   if (loading) return null
 
-  console.log("user email: ", user?.email)
+   const handleLogout = async () => {
+    await logout();
+    router.refresh(); // Forces SSR parts to re-fetch
+  };
 
   return (
     <nav className="border-b border-gray-600 bg-black text-gray-400 h-[100px] max-w-[1200px] mx-auto flex justify-between items-center">
@@ -34,12 +40,16 @@ export const Navbar = () => {
 
         {!user ? (
           <li className="p-5">
-            <Link href="/login">Login</Link>
+            <button
+              onClick={() => router.push("/login")}
+            >
+              Login
+            </button>
           </li>
         ) : (
           <li className="p-5">
             
-              <button onClick={logout} type="submit" className="hover:text-white">
+              <button onClick={handleLogout} type="submit" className="hover:text-white">
                 Logout
               </button>
             

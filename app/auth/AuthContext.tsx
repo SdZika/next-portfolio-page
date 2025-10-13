@@ -3,7 +3,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { createClient } from "@/supabase/client";
 import type { User } from "@supabase/supabase-js";
-import { useRouter } from "next/navigation";
 
 interface AuthContextType {
   user: User | null;
@@ -17,46 +16,32 @@ const AuthContext = createContext<AuthContextType>({
   logout: async () => {},
 });
 
+const supabase = createClient()
+
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
-  const supabase = createClient();
-  const router = useRouter();
-
+  
+  // Initial session load
   useEffect(() => {
-    const getSession = async () => {
-      const { data, error } = await supabase.auth.getSession();
-      if (error) console.error("Error restoring session:", error);
-      setUser(data.session?.user ?? null);
+    const getUser = async () => {
+      const { data } = await supabase.auth.getUser();
+      setUser(data.user ?? null);
       setLoading(false);
     };
+    getUser();
 
-    getSession();
-
-    // Listen for login/logout/session refresh
-    const {
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange((event, session) => {
-      console.log("Auth event:", event);
-      if (event === "SIGNED_IN" || event === "TOKEN_REFRESHED") {
-        setUser(session?.user ?? null);
-      }
-      if (event === "SIGNED_OUT") {
-        setUser(null);
-      }
-
-      router.refresh();
+    // Listen for login/logout
+    const { data: subscription } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null);
     });
 
-    return () => subscription.unsubscribe();
-  }, [supabase, router]);
-
+    return () => subscription.subscription.unsubscribe();
+  }, );
 
   const logout = async () => {
-    const { error } = await supabase.auth.signOut();
-    if (error) console.error("Error logging out:", error);
+    await supabase.auth.signOut();
     setUser(null);
-    router.refresh();
   };
 
   return (
