@@ -29,8 +29,8 @@ export default async function Home() {
         <p className="text-white">{user?.email}</p>
         <div className="my-8">
           <a
-            href="cv.pdf"
-            download="cv.pdf"
+            href="cv-4-25.pdf"
+            download="cv-4-25.pdf"
             className="px-6 py-3 w-full rounded-xl mr-4 bg-gradient-to-br from-orange-400 to-pink-500 text-white"
             target="_blank"
             rel="noopener noreferrer"

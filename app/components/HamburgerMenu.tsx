@@ -2,11 +2,20 @@
 import React, { useState, useEffect } from "react";
 import Link from 'next/link'
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
+import { useAuth } from "../auth/AuthContext";
+import { useRouter } from "next/navigation";
 
 
 export const HamburgerMenu = () => {
 
     const [nav, setNav] = useState(false);
+    const { user, loading, logout } = useAuth()
+    const router = useRouter();
+    
+    const handleLogout = async () => {
+        await logout();
+        router.refresh(); // Forces SSR parts to re-fetch
+    };
 
     const handleNav = () => {
       setNav(!nav);
@@ -15,6 +24,8 @@ export const HamburgerMenu = () => {
     const handleNavItemClick = () => {
       setNav(false);
     };
+
+
   
     // Close the menu when Escape key is pressed
     useEffect(() => {
@@ -42,6 +53,8 @@ export const HamburgerMenu = () => {
         };
     }, []);
 
+
+    if (loading) return null
 
   return (
     <>
@@ -73,6 +86,23 @@ export const HamburgerMenu = () => {
         <li className="p-2">
             <Link href="/contact" onClick={handleNavItemClick}>Contact</Link>
         </li>
+        {!user ? (
+          <li className="p-5">
+            <button
+              onClick={() => router.push("/login")}
+            >
+              Login
+            </button>
+          </li>
+        ) : (
+          <li className="p-5">
+            
+              <button onClick={handleLogout} type="submit" className="hover:text-white">
+                Logout
+              </button>
+            
+          </li>
+        )}
         </ul>
     </div>
   </>
